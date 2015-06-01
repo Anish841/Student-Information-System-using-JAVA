@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="default" extends="struts-default">
+
+		<action name="loginAction" class="org.iiitb.sis.action.admin.LoginAction"
+			method="execute">
+			<result name="admin">adminHome.jsp</result>
+			<result name="user">userHome.jsp</result>
+			<result name="error">Home.jsp</result>
+			<result name="faculty">facultyHome.jsp</result>
+			<result name="success">Home.jsp</result>
+		</action>
+		<action name="sendMessageAction" class="org.iiitb.sis.action.admin.DisplayFriends"
+			method="sendMessage">
+			<result name="success">userProfile.jsp</result>
+			<result name="error">userProfile.jsp</result>
+		</action>
+
+		<action name="addFriendAction" class="org.iiitb.sis.action.admin.DisplayFriends"
+			method="addFriend">
+			<result name="success">userProfile.jsp</result>
+			<result name="error">userProfile.jsp</result>
+		</action>
+		<action name="removeFriendAction" class="org.iiitb.sis.action.admin.DisplayFriends"
+			method="removeFriend">
+			<result name="success">userProfile.jsp</result>
+			<result name="error">userProfile.jsp</result>
+		</action>
+		<action name="Friends" class="org.iiitb.sis.action.admin.DisplayFriends"
+			method="populateFriends">
+
+			<result name="success">displayFriends.jsp</result>
+		</action>
+
+		<action name="friendProfile" class="org.iiitb.sis.action.admin.DisplayFriends"
+			method="execute">
+
+			<result name="success">userProfile.jsp</result>
+		</action>
+		<action name="searchAction" class="org.iiitb.sis.action.admin.DisplayFriends"
+			method="getFriend">
+
+			<result name="success">userProfile.jsp</result>
+			<result name="error">NoUserFound.jsp</result>
+		</action>
+
+		<action name="assignGrades" class="org.iiitb.sis.action.admin.AssignGradesAction"
+			method="filldetails">
+			<result name="success">/assignGrades.jsp</result>
+
+			<result name="error">/addNews.jsp</result>
+		</action>
+		<action name="courseChanged" class="org.iiitb.sis.action.admin.AssignGradesAction"
+			method="isAssigned">
+			<result name="success">/assignGrades.jsp</result>
+
+			<result name="error">/assignGrades.jsp</result>
+		</action>
+		<action name="addGrades" class="org.iiitb.sis.action.admin.AssignGradesAction"
+			method="assignGrade">
+			<result name="success">/gradesuccess.jsp</result>
+
+			<result name="error">/assignGrades.jsp</result>
+		</action>
+
+		<action name="addnews" class="org.iiitb.sis.action.admin.NewsAction"
+			method="addNews">
+			<result name="success">/addNews.jsp</result>
+			<result name="error">/addNews.jsp</result>
+		</action>
+		<action name="deletenews" class="org.iiitb.sis.action.admin.NewsAction"
+			method="deleteNews">
+			<result name="success" type="redirectAction">
+				<param name="actionName">news</param>
+				<param name="msg">true</param>
+			</result>
+			<result name="error">/deleteNews.jsp</result>
+		</action>
+		<action name="news" class="org.iiitb.sis.action.admin.NewsAction"
+			method="fetchNews">
+			<result name="success">/deleteNews.jsp</result>
+			<result name="error">/deleteNews.jsp</result>
+		</action>
+
+		<action name="getFacultyCourses" class="org.iiitb.sis.action.admin.GetCoursesAction"
+			method="populateCourseFaculty">
+			<result name="Success">facultyEnrollStudents.jsp</result>
+			<result name="error">facultyEnrollStudents.jsp</result>
+		</action>
+		
+		<action name="facultyMyCourses" class="org.iiitb.sis.action.admin.GetCoursesAction"
+			method="getAllFacultyCourse">
+			<result name="Success">facultyCourses.jsp</result>
+			<result name="error">facultyCourses.jsp</result>
+		</action>
+
+		<action name="getenrolledStudent" class="org.iiitb.sis.action.admin.GetCoursesAction"
+			method="getenrolledStudent">
+			<result name="Success">facultyEnrollStudents.jsp</result>
+			<result name="error">facultyEnrollStudents.jsp</result>
+		</action>
+
+		<action name="editPhotoAction" class="org.iiitb.sis.action.user.EditProfileAction"
+			method="displayEditPhoto">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">50971520</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg,image/jpg
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">userEditProfile.jsp</result>
+			<result name="error">userEditProfile.jsp</result>
+			<result name="input">userEditProfile.jsp</result>
+		</action>
+		<action name="image1Action" class="org.iiitb.sis.action.user.Image1Action">
+		</action>
+		<action name="submitProfileAction" class="org.iiitb.sis.action.user.EditProfileAction"
+			method="saveChanges">
+			<result name="success">userEditProfile.jsp</result>
+			<result name="error">userEditProfile.jsp</result>
+
+		</action>
+		<action name="editProfileAction" class="org.iiitb.sis.action.user.EditProfileAction"
+			method="displayAllInterest">
+			<result name="success">userEditProfile.jsp</result>
+		</action>
+
+		<action name="logout" class="org.iiitb.sis.action.admin.LoginAction"
+			method="logout">
+			<result name="success">Home.jsp</result>
+		</action>
+
+		<action name="InputSyllabus" class="org.iiitb.sis.action.admin.AddSyllabusAction"
+			method="execute">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">50971520</param>
+				<!-- <param name="allowedTypes"> application/pdf </param> -->
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">facultyAddSyllabus.jsp</result>
+			<result name="error">facultyAddSyllabus.jsp</result>
+		</action>
+
+		<action name="GetCourses" class="org.iiitb.sis.action.admin.AddSyllabusAction"
+			method="populateCourses">
+
+			<result name="success">facultyAddSyllabus.jsp</result>
+		</action>
+		<action name="GetSyllabus" class="org.iiitb.sis.action.admin.AddSyllabusAction"
+			method="populateSyllabus">
+			<result name="success">facultyAddSyllabus.jsp</result>
+		</action>
+
+		<action name="getAllSyllabus" class="org.iiitb.sis.action.admin.AddSyllabusAction"
+			method="getAllSyllabus">
+			<result name="success">userViewSyllabus.jsp</result>
+		</action>
+
+		<action name="addannouncements" class="org.iiitb.sis.action.admin.AnnouncementsAction"
+			method="addAnnouncements">
+			<result name="success">/adminAddAnnouncements.jsp</result>
+			<result name="error">/adminAddAnnouncements.jsp</result>
+		</action>
+
+		<action name="deleteannouncements" class="org.iiitb.sis.action.admin.AnnouncementsAction"
+			method="deleteAnnouncements">
+			<result name="success" type="redirectAction">
+				<param name="actionName">announcements</param>
+				<param name="msg">true</param>
+			</result>
+			<result name="error">/adminDeleteAnnouncements.jsp</result>
+		</action>
+
+		<action name="announcements" class="org.iiitb.sis.action.admin.AnnouncementsAction"
+			method="fetchAnnouncements">
+			<result name="success">/adminDeleteAnnouncements.jsp</result>
+			<result name="error">/adminDeleteAnnouncements.jsp</result>
+		</action>
+
+		<action name="navigate" class="org.iiitb.sis.action.admin.AddStudentAction"
+			method="execute">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">50971520</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+
+			<result name="success">success.jsp</result>
+		</action>
+
+
+		<action name="populateCourseDropDowns" class="org.iiitb.sis.action.admin.AddCourseAction"
+			method="populateCourseDropDowns">
+			<result name="success">addCourse.jsp</result>
+			<result name="error">addCourse.jsp</result>
+		</action>
+
+		<action name="addCourse" class="org.iiitb.sis.action.admin.AddCourseAction"
+			method="execute">
+			<result name="success">success.jsp</result>
+			<result name="error">addCourse.jsp</result>
+		</action>
+
+		<action name="getTerm" class="org.iiitb.sis.action.admin.AddCourseAction"
+			method="getTermDetail">
+			<result name="success">addCourse.jsp</result>
+			<result name="error">addCourse.jsp</result>
+		</action>
+		<action name="getSubjectCourse" class="org.iiitb.sis.action.admin.AddCourseAction"
+			method="getSubjectDetail">
+			<result name="success">addCourse.jsp</result>
+			<result name="error">addCourse.jsp</result>
+		</action>
+
+	<action name="AddEnrolledSubjects" class="org.iiitb.sis.action.admin.EnrollmentAction"
+			method="execute">
+		<result name="success">enrollment.jsp</result>
+		</action>
+		<action name="AddSelectedSubjects" class="org.iiitb.sis.action.admin.EnrolledSubjectsAction"
+			method="execute">
+		<result name="success">enrollment.jsp</result>
+		<result name="error">enrollment.jsp</result>
+		</action>
+	<action name="getEnrolledSubjects" class="org.iiitb.sis.action.user.StudentEnrolledSubjects"
+			method="getEnrolledList">
+			<result name="success">userSubjects.jsp</result>
+			<result name="error">Home.jsp</result>
+	</action>
+	<action name="GradesAllSemAllSub" class="org.iiitb.sis.action.user.UserGradesAction" method="fetchGradesAllSemAllSub">
+         <result name="success">userGrades.jsp</result>
+         <result name="error">Home.jsp</result>
+    </action>
+    
+	<action name="GradesPerSemAllSub" class="org.iiitb.sis.action.user.UserGradesAction" method="fetchGradesPerSemAllSub">
+         <result name="success">userGrades.jsp</result>
+         <result name="error">Home.jsp</result>
+    </action>
+    
+	<action name="youMayKnow" class="org.iiitb.sis.action.user.YouMayKnowAction" method="getAlluser">
+         <result name="success">youMayKnow.jsp</result>
+         <result name="error">youMayKnow.jsp</result>
+    </action>
+    
+    <action name="knowAddFriend" class="org.iiitb.sis.action.user.YouMayKnowAction" method="knowAddFriend">
+         <result name="success">youMayKnow.jsp</result>
+         <result name="error">youMayKnow.jsp</result>
+    </action>
+	
+	<action name="AddProgramme" class="org.iiitb.sis.action.admin.AddProgrammeAction" method="addProgramme">
+         <result name="success">adminAddProgramee.jsp</result>
+         <result name="error">adminAddProgramee.jsp</result>
+    </action>
+    
+    <action name="AddInterest" class="org.iiitb.sis.action.admin.AddInterestAction" method="addInterest">
+         <result name="success">adminAddInterest.jsp</result>
+         <result name="error">adminAddInterest.jsp</result>
+    </action>
+    
+    <action name="LoadProgramme" class="org.iiitb.sis.action.admin.AdminAddCourseAction" method="getProgramme">
+         <result name="success">adminAddCourse.jsp</result>
+         <result name="error">adminAddCourse.jsp</result>
+    </action>
+    
+    <action name="LoadTerms" class="org.iiitb.sis.action.admin.AdminAddCourseAction" method="getTerms">
+         <result name="success">adminAddCourse.jsp</result>
+         <result name="error">adminAddCourse.jsp</result>
+    </action>
+    
+    <action name="LoadUserProgramme" class="org.iiitb.sis.action.admin.AddStudentAction" method="getProgramme">
+         <result name="success">AddStudent.jsp</result>
+         <result name="error">AddStudent.jsp</result>
+    </action>
+    
+    <action name="LoadUserTerms" class="org.iiitb.sis.action.admin.AddStudentAction" method="getTerms">
+         <result name="success">AddStudent.jsp</result>
+         <result name="error">AddStudent.jsp</result>
+    </action>
+    
+    <action name="AddCourseTerm" class="org.iiitb.sis.action.admin.AdminAddCourseAction" method="addCourse">
+         <result name="success">adminAddCourse.jsp</result>
+         <result name="error">adminAddCourse.jsp</result>
+    </action>
+    
+	<action name="populateProgram" class="org.iiitb.sis.action.admin.GetTermSubjectAction"
+			method="populateProgramme">
+			<result name="Success">termSubject.jsp</result>
+			<result name="error">termSubject.jsp</result>
+	</action>
+	
+	<action name="populateInterest" class="org.iiitb.sis.action.admin.GetStudentInterestAction"
+			method="populateInterest">
+			<result name="Success">displayStudentByInterest.jsp</result>
+			<result name="error">displayStudentByInterest.jsp</result>
+	</action>
+		
+	<action name="getStudents" class="org.iiitb.sis.action.admin.GetStudentInterestAction"
+			method="getStudents">
+			<result name="Success">displayStudentByInterest.jsp</result>
+			<result name="error">displayStudentByInterest.jsp</result>
+	</action>
+		
+	<action name="getSubject" class="org.iiitb.sis.action.admin.GetTermSubjectAction"
+			method="getTermSubject">
+			<result name="Success">termSubject.jsp</result>
+			<result name="error">termSubject.jsp</result>
+	</action>
+	
+	<action name="getSubAssToFaculty" class="org.iiitb.sis.action.admin.GetAssSubToFacultyAction"
+			method="populateFacultyId">
+
+			<result name="success">AdminFacultyInfo.jsp</result>
+		</action>
+		<action name="getAssignedSubject" class="org.iiitb.sis.action.admin.GetAssSubToFacultyAction"
+			method="GetAssignedSubject">
+			<result name="success">AdminFacultyInfo.jsp</result>
+	</action>
+	
+	<action name="populateSubjects" class="org.iiitb.sis.action.admin.FacultiesInfoFromSubjectsAction" method="populateSubjectsDropDowns">
+		<result name="success">AdminSubjectInfo.jsp</result>
+	</action>
+	
+	<action name="GetFacultyFromSubject" class="org.iiitb.sis.action.admin.FacultiesInfoFromSubjectsAction" method="execute">
+		<result name="success">AdminSubjectInfo.jsp</result>
+	</action>
+	</package>
+
+</struts>
